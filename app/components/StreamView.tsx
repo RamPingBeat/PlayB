@@ -216,6 +216,22 @@ export default function StreamView({
     }
   };
 
+  const removeSong = async (streamId: string) => {
+    try {
+        const res = await fetch(`/api/streams/Remove?streamId=${streamId}`, {
+            method: "DELETE",
+        })
+        if (res.ok) {
+            toast.success("Song removed successfully")
+            refreshStreams()
+        } else {
+            toast.error("Failed to remove song")
+        }
+    } catch (error) {
+        toast.error("An error occurred while removing the song")
+    }
+}
+
   return (
     <div className="flex flex-col min-h-screen bg-[rgb(10,10,10)] text-gray-200">
       <ToastContainer
@@ -249,6 +265,16 @@ export default function StreamView({
                               {Video.haveUpvoted ? <ChevronDown className="h-4 w-4 mr-1" /> : <ChevronUp className="h-4 w-4 mr-1" />}
                             </Button>
                             <span className="text-lg font-bold ml-2 text-orange-600">{Video.upvotes} votes</span>
+                            {isCreator && (
+                              <Button 
+                                variant="outline" 
+                                  size="sm"
+                                  onClick={() => removeSong(Video.id)}
+                                  className="bg-gray-700 hover:bg-gray-600 text-white transition-colors"
+                                  >
+                                      <X className="h-4 w-4" />
+                              </Button>
+                             )}
                           </div>
                         </div>
                       </div>

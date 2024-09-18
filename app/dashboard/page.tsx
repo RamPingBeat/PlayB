@@ -5,7 +5,7 @@ import { Redirect } from '../components/Redirect';
 
 
 export default function Component() {
-   const creatorId = "e7f91db0-f361-49c0-ae02-34d3e78dea76"
+   const creatorId = "41b2b41f-66ef-49a7-9fdc-41dc59c582ec"
 
     return <StreamView creatorId={creatorId} playVideo={true} />;
 }
